@@ -27,42 +27,24 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var speed_Slider: UISlider!
     
-    
     @IBOutlet weak var power_Label: UILabel!
     
+    @IBOutlet weak var vehicleClass_SegmentControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        weight_TextField.text = String(round(weight_Slider.value))
-        
-        cW_TextField.text = String(cW_Slider.value)
-        
-        crosssection_TextField.text = String(crosssection_Slider.value)
+        speed_Slider.value = 100
         
         speed_TextField.text = String(round(speed_Slider.value))
+
+        vehicleClass_SegmentControl.selectedSegmentIndex = 2
         
-        let speed = speed_Slider.value
-        let cW = cW_Slider.value
-        let cross_section = crosssection_Slider.value
-        let weight = weight_Slider.value
+        setVehicleParameters()
         
-        // calculate the aerodynamic drag force
-        let drag_force = calc_drag_force(speed: Double(speed), cW: Double(cW), cross_section: Double(cross_section))
-        
-        // calculate the road friction force
-        let road_friction_force = calc_road_friction_force(weight: weight)
-        
-        let total_force = calc_total_force(drag_force: drag_force, road_friction_force: road_friction_force)
-        
-        let power = calcPower(total_force: total_force, speed: Double(speed))
-        
-        // calculate the power in kW
-        let power_kW = power/1000
-        
-        // calculate rounded power
-        let power_kW_rounded = round(power_kW*10)/10
+        // calculate the total vehicle power in kW
+        let power_kW_rounded = calc_rounded_power()
         
         power_Label.text = String(power_kW_rounded) + " kW"
         
@@ -127,12 +109,7 @@ class ViewController: UIViewController {
     }
     
     
-    
-    
-    // change the TextField value on Slider change
-    @IBAction func weight_change_Slider(_ sender: Any) {
-        
-        weight_TextField.text = String(round(weight_Slider.value))
+    func calc_rounded_power() -> Double {
         
         // define variables from Slider values
         let speed = speed_Slider.value
@@ -155,6 +132,81 @@ class ViewController: UIViewController {
         
         // calculate rounded power
         let power_kW_rounded = round(power_kW*10)/10
+        
+        return power_kW_rounded
+    }
+    
+    // set the Slider and Text field values
+    func setVehicleParameters(){
+        if vehicleClass_SegmentControl.selectedSegmentIndex == 0{
+            weight_Slider.value = 1000
+            weight_TextField.text = String(round(weight_Slider.value))
+            cW_Slider.value = 0.31
+            cW_TextField.text = String(cW_Slider.value)
+            crosssection_Slider.value = 1.8
+            crosssection_TextField.text = String(crosssection_Slider.value)
+            
+            // update the total power
+            let power_kW_rounded = calc_rounded_power()
+            power_Label.text = String(power_kW_rounded) + " kW"
+        }
+        else if vehicleClass_SegmentControl.selectedSegmentIndex == 1{
+            weight_Slider.value = 1500
+            weight_TextField.text = String(round(weight_Slider.value))
+            cW_Slider.value = 0.25
+            cW_TextField.text = String(cW_Slider.value)
+            crosssection_Slider.value = 2
+            crosssection_TextField.text = String(crosssection_Slider.value)
+            
+            // update the total power
+            let power_kW_rounded = calc_rounded_power()
+            power_Label.text = String(power_kW_rounded) + " kW"
+            
+        }
+        else if vehicleClass_SegmentControl.selectedSegmentIndex == 2{
+            weight_Slider.value = 2000
+            weight_TextField.text = String(round(weight_Slider.value))
+            cW_Slider.value = 0.23
+            cW_TextField.text = String(cW_Slider.value)
+            crosssection_Slider.value = 2
+            crosssection_TextField.text = String(crosssection_Slider.value)
+            // update the total power
+            let power_kW_rounded = calc_rounded_power()
+            power_Label.text = String(power_kW_rounded) + " kW"
+            }
+        else if vehicleClass_SegmentControl.selectedSegmentIndex == 3{
+            weight_Slider.value = 2200
+            weight_TextField.text = String(round(weight_Slider.value))
+            cW_Slider.value = 0.23
+            cW_TextField.text = String(cW_Slider.value)
+            crosssection_Slider.value = 2
+            crosssection_TextField.text = String(crosssection_Slider.value)
+            
+            // update the total power
+            let power_kW_rounded = calc_rounded_power()
+            power_Label.text = String(power_kW_rounded) + " kW"
+            }
+        else if vehicleClass_SegmentControl.selectedSegmentIndex == 4{
+            weight_Slider.value = 2500
+            weight_TextField.text = String(round(weight_Slider.value))
+            cW_Slider.value = 0.2
+            cW_TextField.text = String(cW_Slider.value)
+            crosssection_Slider.value = 1.8
+            crosssection_TextField.text = String(crosssection_Slider.value)
+            
+            // update the total power
+            let power_kW_rounded = calc_rounded_power()
+            power_Label.text = String(power_kW_rounded) + " kW"
+            }
+    }
+    
+    
+    // change the TextField value on Slider change
+    @IBAction func weight_change_Slider(_ sender: Any) {
+        
+        weight_TextField.text = String(round(weight_Slider.value))
+        
+        let power_kW_rounded = calc_rounded_power()
         
         power_Label.text = String(power_kW_rounded) + " kW"
     }
@@ -164,29 +216,9 @@ class ViewController: UIViewController {
     
         cW_TextField.text = String(round(cW_Slider.value*100)/100)
         
-    // define variables from Slider values
-    let speed = speed_Slider.value
-    let cW = cW_Slider.value
-    let cross_section = crosssection_Slider.value
-    let weight = weight_Slider.value
+        let power_kW_rounded = calc_rounded_power()
     
-    // calculate the aerodynamic drag force
-    let drag_force = calc_drag_force(speed: Double(speed), cW: Double(cW), cross_section: Double(cross_section))
-    
-    // calculate the road friction force
-    let road_friction_force = calc_road_friction_force(weight: weight)
-    
-    let total_force = calc_total_force(drag_force: drag_force, road_friction_force: road_friction_force)
-    
-    let power = calcPower(total_force: total_force, speed: Double(speed))
-    
-    // calculate the power in kW
-    let power_kW = power/1000
-    
-    // calculate rounded power
-    let power_kW_rounded = round(power_kW*10)/10
-    
-    power_Label.text = String(power_kW_rounded) + " kW"
+        power_Label.text = String(power_kW_rounded) + " kW"
     
     }
     
@@ -196,27 +228,7 @@ class ViewController: UIViewController {
         
         crosssection_TextField.text = String(round(crosssection_Slider.value*10)/10)
         
-        // define variables from Slider values
-        let speed = speed_Slider.value
-        let cW = cW_Slider.value
-        let cross_section = crosssection_Slider.value
-        let weight = weight_Slider.value
-        
-        // calculate the aerodynamic drag force
-        let drag_force = calc_drag_force(speed: Double(speed), cW: Double(cW), cross_section: Double(cross_section))
-        
-        // calculate the road friction force
-        let road_friction_force = calc_road_friction_force(weight: weight)
-        
-        let total_force = calc_total_force(drag_force: drag_force, road_friction_force: road_friction_force)
-        
-        let power = calcPower(total_force: total_force, speed: Double(speed))
-        
-        // calculate the power in kW
-        let power_kW = power/1000
-        
-        // calculate rounded power
-        let power_kW_rounded = round(power_kW*10)/10
+        let power_kW_rounded = calc_rounded_power()
         
         power_Label.text = String(power_kW_rounded) + " kW"
         
@@ -225,34 +237,19 @@ class ViewController: UIViewController {
     
     // change the TextField value on Slider change
     @IBAction func speed_change_Slider(_ sender: Any) {
+        
         speed_TextField.text = String(round(speed_Slider.value))
         
-        
-        // define variables from Slider values
-        let speed = speed_Slider.value
-        let cW = cW_Slider.value
-        let cross_section = crosssection_Slider.value
-        let weight = weight_Slider.value
-        
-        // calculate the aerodynamic drag force
-        let drag_force = calc_drag_force(speed: Double(speed), cW: Double(cW), cross_section: Double(cross_section))
-        
-        // calculate the road friction force
-        let road_friction_force = calc_road_friction_force(weight: weight)
-        
-        let total_force = calc_total_force(drag_force: drag_force, road_friction_force: road_friction_force)
-        
-        let power = calcPower(total_force: total_force, speed: Double(speed))
-        
-        // calculate the power in kW
-        let power_kW = power/1000
-        
-        // calculate rounded power
-        let power_kW_rounded = round(power_kW*10)/10
+        let power_kW_rounded = calc_rounded_power()
         
         power_Label.text = String(power_kW_rounded) + " kW"
     }
+            
+    @IBAction func VehicleClass_value_changed(_ sender: Any) {
+        
+         setVehicleParameters()
     
+    }
     
     
 }

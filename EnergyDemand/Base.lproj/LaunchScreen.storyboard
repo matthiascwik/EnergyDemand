@@ -15,11 +15,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="car" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jAr-yE-Zj3">
-                                <rect key="frame" x="173" y="423.5" width="68" height="50"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jAr-yE-Zj3">
+                                <rect key="frame" x="173" y="424" width="68" height="50"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50" scale="medium" weight="thin"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="v0.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fft-DD-XQz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v0.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fft-DD-XQz">
                                 <rect key="frame" x="192" y="485" width="30" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -28,7 +28,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="jAr-yE-Zj3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Com-4a-hDy"/>
-                            <constraint firstItem="Fft-DD-XQz" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="40" id="Pqy-FM-4cu"/>
+                            <constraint firstItem="Fft-DD-XQz" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="47.5" id="Pqy-FM-4cu"/>
                             <constraint firstItem="jAr-yE-Zj3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ZRt-fo-ZGV"/>
                             <constraint firstItem="Fft-DD-XQz" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="agi-zN-BCz"/>
                         </constraints>
